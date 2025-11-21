@@ -27,6 +27,11 @@ export class RestClienteComponent {
   response: any = null;
   status: number | null = null;
   timeMs: number | null = null;
+  bodyType: 'json' | 'form' = 'json';
+  formFields = [
+  { key: '', value: '' }
+];
+
 
   constructor(private http: HttpClient) {}
 
@@ -34,40 +39,59 @@ export class RestClienteComponent {
     this.request.headers.push({ key: '', value: '' });
   }
 
-  send() {
-    let headers = new HttpHeaders();
+send() {
 
-    this.request.headers.forEach(h => {
-      if (h.key && h.value) headers = headers.set(h.key, h.value);
-    });
+  let headers = new HttpHeaders();
+  this.request.headers.forEach(h => {
+    if (h.key && h.value) headers = headers.set(h.key, h.value);
+  });
 
-    let body = null;
-    if (this.request.body && this.request.method !== 'GET') {
+  let body: any = null;
+
+  if (this.request.method !== 'GET') {
+
+    if (this.bodyType === 'json') {
+
       try {
         body = JSON.parse(this.request.body);
       } catch {
-        alert('El body no tiene un JSON válido');
+        alert('JSON inválido');
         return;
       }
     }
 
-    const start = performance.now();
+    if (this.bodyType === 'form') {
+      headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
 
-    this.http.request(this.request.method, this.request.url, {
-      headers,
-      body,
-      observe: 'response'
-    }).subscribe({
-      next: (res) => {
-        this.status = res.status;
-        this.timeMs = performance.now() - start;
-        this.response = res.body;
-      },
-      error: (err) => {
-        this.status = err.status || 0;
-        this.timeMs = performance.now() - start;
-        this.response = err.error || err.message;
-      }
-    });
+      const params = new URLSearchParams();
+
+      this.formFields.forEach(f => {
+        if (f.key) params.append(f.key, f.value);
+      });
+
+      body = params.toString();
+    }
   }
+
+  const start = performance.now();
+
+  this.http.request(this.request.method, this.request.url, {
+    body,
+    headers,
+    observe: 'response'
+  }).subscribe({
+    next: (res) => {
+      this.status = res.status;
+      this.timeMs = performance.now() - start;
+      this.response = res.body;
+    },
+    error: (err) => {
+      this.status = err.status || 0;
+      this.timeMs = performance.now() - start;
+      this.response = err.error || err.message;
+    }
+  });
+
+}
+
 }

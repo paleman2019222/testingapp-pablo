@@ -1,68 +1,194 @@
+/* ------------ BASE STYLES ------------ */
 * {
-    font-family: "Inter", sans-serif;
-  }
-  
-  .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 25px;
-  }
-  
-  .row {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .row input, select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-  
-  button {
-    padding: 10px 18px;
-    border-radius: 6px;
-    border: none;
-    background: #007aff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .section {
-    margin-top: 25px;
-  }
-  
-  .section input {
-    width: 48%;
-    padding: 8px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-  
-  .small {
-    margin-top: 10px;
-    background: #444;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-family: monospace;
-  }
-  
-  .response pre {
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 6px;
-    overflow-x: auto;
-  }
-  
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ------------ ROWS ------------ */
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.top-row select,
+.top-row input {
+  flex: 1;
+}
+
+/* Inputs */
+select, input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  background: #007aff;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #0060d1;
+}
+
+.small {
+  margin-top: 10px;
+  background: #444;
+}
+
+.small:hover {
+  background: #222;
+}
+
+/* ------------ SECTIONS ------------ */
+.section {
+  margin-top: 30px;
+}
+
+.section h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* Key/value rows */
+.key-value-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.key-value-row input {
+  flex: 1;
+}
+
+/* ------------ TABS ------------ */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 10px;
+}
+
+.tab {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  background: #fafafa;
+  margin-right: 4px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  transition: 0.15s;
+}
+
+.tab:hover {
+  background: #f0f0f0;
+}
+
+.tab.active {
+  background: white;
+  border: 1px solid #ddd;
+  border-bottom: 2px solid white;
+  font-weight: 600;
+  color: #007aff;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+}
+
+/* ------------ RESPONSE SECTION ------------ */
+.response h3 {
+  margin-bottom: 10px;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.status {
+  font-weight: 600;
+  color: #2ecc71;
+}
+
+.time {
+  font-weight: 600;
+  color: #1abc9c;
+}
+
+/* 👇 Consola estilo VS Code / Postman */
+.console-output {
+  background: #1e1e1e;
+  color: #dcdcdc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 14px;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  line-height: 1.45;
+  box-shadow: inset 0 0 12px #00000044;
+}
+
+/* Scrollbars */
+.console-output::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.console-output::-webkit-scrollbar-track {
+  background: #2b2b2b;
+  border-radius: 8px;
+}
+
+.console-output::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 8px;
+}
+
+.console-output::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
