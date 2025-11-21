@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RestCliente } from './rest-cliente';
+import { RestClienteComponent } from './rest-cliente';
 
 describe('RestCliente', () => {
-  let component: RestCliente;
-  let fixture: ComponentFixture<RestCliente>;
+  let component: RestClienteComponent;
+  let fixture: ComponentFixture<RestClienteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RestCliente]
+      imports: [RestClienteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RestCliente);
+    fixture = TestBed.createComponent(RestClienteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

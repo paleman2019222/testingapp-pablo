@@ -1,78 +1,65 @@
 <div class="container">
 
-  <h1>Mini Postman</h1>
+  <h1>API TESTING TOOL</h1>
 
+  <div class="panel panel-top">
+    <div class="row top-row">
+      <select [(ngModel)]="request.method">
+        <option *ngFor="let m of methods">{{ m }}</option>
+      </select>
 
-  <div class="row top-row">
-    <select [(ngModel)]="request.method">
-      <option *ngFor="let m of methods">{{ m }}</option>
-    </select>
+      <input type="text" placeholder="https://ruta/aqui" [(ngModel)]="request.url">
 
-    <input type="text" placeholder="https://ruta/aqui" [(ngModel)]="request.url">
-
-    <button (click)="send()">Enviar</button>
+      <button class="btn-primary" (click)="send()">Enviar</button>
+    </div>
   </div>
 
+  <div class="panel">
+    <div class="section-title">Headers</div>
 
-  <div class="section">
-    <h3>Headers</h3>
-
-    <div class="key-value-row" *ngFor="let h of request.headers">
+    <div class="kv-row" *ngFor="let h of request.headers">
       <input placeholder="Key" [(ngModel)]="h.key">
       <input placeholder="Value" [(ngModel)]="h.value">
     </div>
 
-    <button class="small" (click)="addHeader()">+ Header</button>
+    <button class="btn-secondary" (click)="addHeader()">+ Header</button>
   </div>
 
-
-  <div class="section" *ngIf="request.method !== 'GET'">
-    <h3>Body</h3>
+  <div class="panel" *ngIf="request.method !== 'GET'">
+    <div class="section-title">Body</div>
 
     <div class="tabs">
-      <div 
-        class="tab" 
-        [class.active]="bodyType === 'json'"
-        (click)="bodyType = 'json'"
-      >
+      <div class="tab" [class.active]="bodyType === 'json'" (click)="bodyType = 'json'">
         raw (JSON)
       </div>
 
-      <div 
-        class="tab" 
-        [class.active]="bodyType === 'form'"
-        (click)="bodyType = 'form'"
-      >
+      <div class="tab" [class.active]="bodyType === 'form'" (click)="bodyType = 'form'">
         x-www-form-urlencoded
       </div>
     </div>
-
 
     <div class="tab-content" *ngIf="bodyType === 'json'">
       <textarea rows="8" placeholder="{ }" [(ngModel)]="request.body"></textarea>
     </div>
 
-
     <div class="tab-content" *ngIf="bodyType === 'form'">
-
-      <div class="key-value-row" *ngFor="let f of formFields">
+      <div class="kv-row" *ngFor="let f of formFields">
         <input placeholder="Key" [(ngModel)]="f.key">
         <input placeholder="Value" [(ngModel)]="f.value">
       </div>
 
-      <button class="small" (click)="formFields.push({key:'', value:''})">
+      <button class="btn-secondary" (click)="formFields.push({key:'', value:''})">
         + Param
       </button>
     </div>
   </div>
 
-
-  <div class="section response" *ngIf="status !== null">
-    <h3>Respuesta</h3>
+  <div class="panel" *ngIf="status !== null">
+    <div class="section-title">Respuesta</div>
 
     <div class="meta">
-      <span class="status">Status: {{ status }}</span>
-      <span class="time">Tiempo: {{ timeMs | number:'1.0-0' }} ms</span>
+      <span class="meta-chip success">Status: {{ status }}</span>
+      <span class="meta-chip info">Tiempo: {{ timeMs | number:'1.0-0' }} ms</span>
     </div>
 
     <div class="console-output">
